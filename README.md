@@ -10,6 +10,11 @@ A server built using Model-Context Protocol (MCP) that provides AI agents a stan
 - **Error handling** for invalid Pokémon names, moves, and input validation
 - **Vercel deployment ready** with zero-config deployment support
 
+## Prerequisites
+
+- Node.js 18+ 
+- npm
+
 ## Installation
 
 ```bash
@@ -29,7 +34,7 @@ npm start
 
 ### MCP Client Configuration
 
-Configure your MCP client (Claude Desktop, Cursor, etc.) to use your local source code:
+Configure your MCP client (Claude Desktop, Cursor, etc.):
 
 **Local development:**
 ```json
@@ -110,12 +115,9 @@ The project is configured for zero-config deployment on Vercel:
 npm run vercel-build
 ```
 
-The MCP manifest is available at `/mcp/manifest.json`
-
 ## API Endpoints
 
-- `/mcp/manifest.json` - MCP manifest describing available tools
-- Main MCP server endpoint for tool calls
+- `/api/mcp` - Main MCP server endpoint
 
 ## Development
 
@@ -123,7 +125,7 @@ The MCP manifest is available at `/mcp/manifest.json`
 npm run dev    # Watch mode for development
 npm run build  # Build TypeScript
 npm run lint   # Lint code
-npm test       # Run test calculation
+npm run test   # Run test calculation
 ```
 
 ## Testing
@@ -187,7 +189,8 @@ src/
 └── types.ts       # TypeScript type definitions
 
 api/
-└── manifest.ts    # Vercel API route for MCP manifest
+└── mcp/
+    └── route.ts   # Vercel API route for MCP server
 
 vercel.json        # Vercel deployment configuration
 ```
