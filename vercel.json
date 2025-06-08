@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "pokemon-vgc-calc-mcp",
+  "builds": [
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/mcp/manifest.json",
+      "dest": "/api/manifest"
+    },
+    {
+      "src": "/.*",
+      "dest": "/dist/index.js"
+    }
+  ],
+  "functions": {
+    "dist/index.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
