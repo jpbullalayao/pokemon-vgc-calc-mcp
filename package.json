@@ -1,6 +1,6 @@
 {
   "name": "pokemon-vgc-calc-mcp",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Pokémon damage calculator MCP server using smogon/damage-calc",
   "main": "dist/index.js",
   "bin": {

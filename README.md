@@ -22,6 +22,15 @@ npm install
 npm run build
 ```
 
+## Development
+
+```bash
+npm run dev    # Watch mode for development
+npm run build  # Build TypeScript
+npm run lint   # Lint code
+npm run test   # Run test calculation
+```
+
 ### Local MCP Server (stdio)
 
 Run locally for development or direct MCP client integration:
@@ -105,29 +114,6 @@ Damage: 198-234
 KO Chance: guaranteed OHKO
 ```
 
-## Deployment
-
-### Vercel
-
-The project is configured for zero-config deployment on Vercel:
-
-```bash
-npm run vercel-build
-```
-
-## API Endpoints
-
-- `/api/mcp` - Main MCP server endpoint
-
-## Development
-
-```bash
-npm run dev    # Watch mode for development
-npm run build  # Build TypeScript
-npm run lint   # Lint code
-npm run test   # Run test calculation
-```
-
 ## Testing
 
 ### Local MCP Server Testing
@@ -187,13 +173,18 @@ src/
 ├── index.ts       # Main MCP server implementation
 ├── calculator.ts  # Damage calculation wrapper
 └── types.ts       # TypeScript type definitions
-
-api/
-└── mcp/
-    └── route.ts   # Vercel API route for MCP server
-
-vercel.json        # Vercel deployment configuration
 ```
+
+## Author's Note
+
+Interested in the progress of this project? Feel free to follow the repo for live updates!
+
+If you need to get a hold of me regarding this project, feel free to either:
+
+- email me at professor.ragna@gmail.com
+- tweet me [@professorragna](https://twitter.com/professorragna)
+
+If you're interested in helping to fund this project, you can support me [here](https://www.buymeacoffee.com/professorragna). Any and all support is greatly appreciated!
 
 ## License
 
