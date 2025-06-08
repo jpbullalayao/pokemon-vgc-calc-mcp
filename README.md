@@ -154,6 +154,58 @@ npm run lint   # Lint code
 npm test       # Run test calculation
 ```
 
+## Testing
+
+### Local MCP Server Testing
+
+You can test the local MCP server using the MCP Inspector:
+
+```bash
+npm run build
+npx @modelcontextprotocol/inspector node path/to/pokemon-vgc-calc-mcp/dist/index.js
+```
+
+#### Test Input Example
+
+Use the following input to test the `calculateDamage` tool:
+
+```json
+{
+  "attacker": {
+    "species": "Chien-Pao",
+    "nature": "Jolly",
+    "evs": {
+      "atk": 252,
+      "spe": 252,
+      "hp": 4
+    },
+    "level": 50
+  },
+  "defender": {
+    "species": "Flutter Mane",
+    "nature": "Modest",
+    "evs": {
+      "hp": 164,
+      "def": 100
+    },
+    "level": 50
+  },
+  "move": {
+    "name": "Icicle Crash"
+  },
+  "field": {}
+}
+```
+
+#### Expected Output
+
+```
+**252 Atk Sword of Ruin Chien-Pao Icicle Crash vs. 164 HP / 100 Def Flutter Mane: 126-148 (83.4 - 98%) -- guaranteed 2HKO**
+
+Damage: 126-148
+KO Chance: guaranteed 2HKO
+```
+
 ## Project Structure
 
 ```
