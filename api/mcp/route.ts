@@ -134,7 +134,7 @@ const handler = createMcpHandler((server) => {
   server.tool(
     'calculateDamage',
     'Calculates the battle damage between an attacking and a defending Pokémon, considering their stats, abilities, items, and field conditions.',
-    CalculateDamageSchema,
+    CalculateDamageSchema.shape,
     async (params) => {
       try {
         const attacker = createSmogonPokemon(params.attacker);
