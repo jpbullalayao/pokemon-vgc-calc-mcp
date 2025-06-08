@@ -1,6 +1,6 @@
 {
   "name": "pokemon-vgc-calc-mcp",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Pokémon damage calculator MCP server using smogon/damage-calc",
   "main": "dist/index.js",
   "bin": {
@@ -17,9 +17,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.3",
+    "@modelcontextprotocol/sdk": "1.12.0",
     "@smogon/calc": "^0.10.0",
-    "@vercel/mcp-adapter": "*",
+    "@vercel/mcp-adapter": "0.9.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -38,6 +38,6 @@
     "model-context-protocol",
     "smogon"
   ],
-  "author": "AI Assistant",
+  "author": "Professor Ragna <professor.ragna@gmail.com>",
   "license": "MIT"
 }

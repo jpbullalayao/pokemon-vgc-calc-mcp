@@ -1,6 +1,6 @@
 # Pokémon VGC Damage Calculator MCP Server
 
-A serverless API built using the Model-Context Protocol (MCP) that provides a standardized interface for performing Pokémon damage calculations using the `@smogon/calc` package.
+A server built using Model-Context Protocol (MCP) that provides AI agents a standardized interface for performing Pokémon damage calculations using the `@smogon/calc` package.
 
 ## Features
 
@@ -10,6 +10,11 @@ A serverless API built using the Model-Context Protocol (MCP) that provides a st
 - **Error handling** for invalid Pokémon names, moves, and input validation
 - **Vercel deployment ready** with zero-config deployment support
 
+## Prerequisites
+
+- Node.js 18+ 
+- npm
+
 ## Installation
 
 ```bash
@@ -17,9 +22,14 @@ npm install
 npm run build
 ```
 
-## Usage
+## Development
 
-This MCP server supports both **local stdio** and **remote SSE/HTTP** access using the `@vercel/mcp-adapter`.
+```bash
+npm run dev    # Watch mode for development
+npm run build  # Build TypeScript
+npm run lint   # Lint code
+npm run test   # Run test calculation
+```
 
 ### Local MCP Server (stdio)
 
@@ -31,42 +41,18 @@ npm run build
 npm start
 ```
 
-### Remote MCP Server (SSE Transport)
-
-After deploying to Vercel, configure your MCP client to connect via SSE:
-
-```json
-{
-  "mcpServers": {
-    "pokemon-calc": {
-      "url": "https://your-deployment.vercel.app/api/mcp"
-    }
-  }
-}
-```
-
 ### MCP Client Configuration
 
-Configure your MCP client (Claude Desktop, etc.) to use the remote server:
+Configure your MCP client (Claude Desktop, Cursor, etc.):
 
 **Local development:**
 ```json
 {
   "mcpServers": {
     "pokemon-calc": {
-      "command": "npx",
-      "args": ["pokemon-vgc-calc-mcp"]
-    }
-  }
-}
-```
-
-**Remote Vercel deployment:**
-```json
-{
-  "mcpServers": {
-    "pokemon-calc": {
-      "url": "https://your-deployment.vercel.app/api/mcp"
+      "command": "node",
+      "args": ["path/to/pokemon-vgc-calc-mcp/dist/index.js"],
+      "env": {}
     }
   }
 }
@@ -76,7 +62,7 @@ Configure your MCP client (Claude Desktop, etc.) to use the remote server:
 
 The server exposes one primary tool: `calculateDamage`
 
-### Tool: calculateDamage
+#### Tool: calculateDamage
 
 Calculates battle damage between an attacking and defending Pokémon.
 
@@ -128,30 +114,56 @@ Damage: 198-234
 KO Chance: guaranteed OHKO
 ```
 
-## Deployment
+## Testing
 
-### Vercel
+### Local MCP Server Testing
 
-The project is configured for zero-config deployment on Vercel:
+You can test the local MCP server using the MCP Inspector:
 
 ```bash
-npm run vercel-build
+npm run build
+npx @modelcontextprotocol/inspector node path/to/pokemon-vgc-calc-mcp/dist/index.js
 ```
 
-The MCP manifest is available at `/mcp/manifest.json`
+#### Test Input Example
 
-## API Endpoints
+Use the following input to test the `calculateDamage` tool:
 
-- `/mcp/manifest.json` - MCP manifest describing available tools
-- Main MCP server endpoint for tool calls
+```json
+{
+  "attacker": {
+    "species": "Chien-Pao",
+    "nature": "Jolly",
+    "evs": {
+      "atk": 252,
+      "spe": 252,
+      "hp": 4
+    },
+    "level": 50
+  },
+  "defender": {
+    "species": "Flutter Mane",
+    "nature": "Modest",
+    "evs": {
+      "hp": 164,
+      "def": 100
+    },
+    "level": 50
+  },
+  "move": {
+    "name": "Icicle Crash"
+  },
+  "field": {}
+}
+```
 
-## Development
+#### Expected Output
 
-```bash
-npm run dev    # Watch mode for development
-npm run build  # Build TypeScript
-npm run lint   # Lint code
-npm test       # Run test calculation
+```
+**252 Atk Sword of Ruin Chien-Pao Icicle Crash vs. 164 HP / 100 Def Flutter Mane: 126-148 (83.4 - 98%) -- guaranteed 2HKO**
+
+Damage: 126-148
+KO Chance: guaranteed 2HKO
 ```
 
 ## Project Structure
@@ -161,23 +173,18 @@ src/
 ├── index.ts       # Main MCP server implementation
 ├── calculator.ts  # Damage calculation wrapper
 └── types.ts       # TypeScript type definitions
-
-api/
-└── manifest.ts    # Vercel API route for MCP manifest
-
-vercel.json        # Vercel deployment configuration
 ```
 
-## Requirements Met
+## Author's Note
 
-This implementation fulfills all requirements from the PRD:
+Interested in the progress of this project? Feel free to follow the repo for live updates!
 
-- ✅ **FR1**: Exposes `calculateDamage` tool via MCP
-- ✅ **FR2**: Accepts structured JSON with attacker, defender, move, and field data  
-- ✅ **FR3**: Uses `@smogon/calc` for all damage calculations
-- ✅ **FR4**: Returns description, damage range, and KO chance
-- ✅ **FR5**: Proper error handling for invalid inputs
-- ✅ **TR1-6**: TypeScript, MCP SDK, Vercel deployment, npm package management
+If you need to get a hold of me regarding this project, feel free to either:
+
+- email me at professor.ragna@gmail.com
+- tweet me [@professorragna](https://twitter.com/professorragna)
+
+If you're interested in helping to fund this project, you can support me [here](https://www.buymeacoffee.com/professorragna). Any and all support is greatly appreciated!
 
 ## License
 
