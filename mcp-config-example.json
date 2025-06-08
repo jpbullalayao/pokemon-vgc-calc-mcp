@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "pokemon-calc": {
-      "command": "node",
-      "args": ["/Users/professorragna/projects/pokemon-vgc-calc-mcp/dist/index.js"],
-      "env": {}
-    }
-  }
-}

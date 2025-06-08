@@ -1,6 +1,6 @@
 # Pokémon VGC Damage Calculator MCP Server
 
-A serverless API built using the Model-Context Protocol (MCP) that provides a standardized interface for performing Pokémon damage calculations using the `@smogon/calc` package.
+A server built using Model-Context Protocol (MCP) that provides AI agents a standardized interface for performing Pokémon damage calculations using the `@smogon/calc` package.
 
 ## Features
 
@@ -17,10 +17,6 @@ npm install
 npm run build
 ```
 
-## Usage
-
-This MCP server supports both **local stdio** and **remote SSE/HTTP** access using the `@vercel/mcp-adapter`.
-
 ### Local MCP Server (stdio)
 
 Run locally for development or direct MCP client integration:
@@ -31,42 +27,18 @@ npm run build
 npm start
 ```
 
-### Remote MCP Server (SSE Transport)
-
-After deploying to Vercel, configure your MCP client to connect via SSE:
-
-```json
-{
-  "mcpServers": {
-    "pokemon-calc": {
-      "url": "https://your-deployment.vercel.app/api/mcp"
-    }
-  }
-}
-```
-
 ### MCP Client Configuration
 
-Configure your MCP client (Claude Desktop, etc.) to use the remote server:
+Configure your MCP client (Claude Desktop, Cursor, etc.) to use your local source code:
 
 **Local development:**
 ```json
 {
   "mcpServers": {
     "pokemon-calc": {
-      "command": "npx",
-      "args": ["pokemon-vgc-calc-mcp"]
-    }
-  }
-}
-```
-
-**Remote Vercel deployment:**
-```json
-{
-  "mcpServers": {
-    "pokemon-calc": {
-      "url": "https://your-deployment.vercel.app/api/mcp"
+      "command": "node",
+      "args": ["path/to/pokemon-vgc-calc-mcp/dist/index.js"],
+      "env": {}
     }
   }
 }
@@ -76,7 +48,7 @@ Configure your MCP client (Claude Desktop, etc.) to use the remote server:
 
 The server exposes one primary tool: `calculateDamage`
 
-### Tool: calculateDamage
+#### Tool: calculateDamage
 
 Calculates battle damage between an attacking and defending Pokémon.
 
@@ -219,17 +191,6 @@ api/
 
 vercel.json        # Vercel deployment configuration
 ```
-
-## Requirements Met
-
-This implementation fulfills all requirements from the PRD:
-
-- ✅ **FR1**: Exposes `calculateDamage` tool via MCP
-- ✅ **FR2**: Accepts structured JSON with attacker, defender, move, and field data  
-- ✅ **FR3**: Uses `@smogon/calc` for all damage calculations
-- ✅ **FR4**: Returns description, damage range, and KO chance
-- ✅ **FR5**: Proper error handling for invalid inputs
-- ✅ **TR1-6**: TypeScript, MCP SDK, Vercel deployment, npm package management
 
 ## License
 
