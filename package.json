@@ -39,5 +39,19 @@
     "smogon"
   ],
   "author": "Professor Ragna <professor.ragna@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/professorragna/pokemon-vgc-calc-mcp.git"
+  },
+  "homepage": "https://github.com/professorragna/pokemon-vgc-calc-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/professorragna/pokemon-vgc-calc-mcp/issues"
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "!dist/**/*.test.*",
+    "README.md"
+  ]
 }

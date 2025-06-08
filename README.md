@@ -17,6 +17,14 @@ A server built using Model-Context Protocol (MCP) that provides AI agents a stan
 
 ## Installation
 
+### From npm (Recommended)
+
+```bash
+npm install -g pokemon-vgc-calc-mcp
+```
+
+### From source
+
 ```bash
 npm install
 npm run build
@@ -44,6 +52,19 @@ npm start
 ### MCP Client Configuration
 
 Configure your MCP client (Claude Desktop, Cursor, etc.):
+
+**Using npm global install:**
+```json
+{
+  "mcpServers": {
+    "pokemon-calc": {
+      "command": "npx",
+      "args": ["pokemon-vgc-calc-mcp"],
+      "env": {}
+    }
+  }
+}
+```
 
 **Local development:**
 ```json
