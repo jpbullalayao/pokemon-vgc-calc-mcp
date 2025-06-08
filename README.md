@@ -53,7 +53,7 @@ npm start
 
 Configure your MCP client (Claude Desktop, Cursor, etc.):
 
-**Using npm global install:**
+**Using remote npm package:**
 ```json
 {
   "mcpServers": {
