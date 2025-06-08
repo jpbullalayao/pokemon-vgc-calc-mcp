@@ -19,7 +19,60 @@ npm run build
 
 ## Usage
 
-### As an MCP Server
+This MCP server supports both **local stdio** and **remote SSE/HTTP** access using the `@vercel/mcp-adapter`.
+
+### Local MCP Server (stdio)
+
+Run locally for development or direct MCP client integration:
+
+```bash
+npm install
+npm run build
+npm start
+```
+
+### Remote MCP Server (SSE Transport)
+
+After deploying to Vercel, configure your MCP client to connect via SSE:
+
+```json
+{
+  "mcpServers": {
+    "pokemon-calc": {
+      "url": "https://your-deployment.vercel.app/api/mcp"
+    }
+  }
+}
+```
+
+### MCP Client Configuration
+
+Configure your MCP client (Claude Desktop, etc.) to use the remote server:
+
+**Local development:**
+```json
+{
+  "mcpServers": {
+    "pokemon-calc": {
+      "command": "npx",
+      "args": ["pokemon-vgc-calc-mcp"]
+    }
+  }
+}
+```
+
+**Remote Vercel deployment:**
+```json
+{
+  "mcpServers": {
+    "pokemon-calc": {
+      "url": "https://your-deployment.vercel.app/api/mcp"
+    }
+  }
+}
+```
+
+### Tools Available
 
 The server exposes one primary tool: `calculateDamage`
 
@@ -39,36 +92,40 @@ Calculates battle damage between an attacking and defending Pokémon.
 - `koChance`: Knock-out probability description
 - `fullResult`: Complete result object from smogon/calc
 
-### Example Request
+### Example Usage
+
+When called by an MCP client, the tool accepts parameters like:
 
 ```json
 {
   "attacker": {
     "species": "Pikachu",
     "level": 50,
-    "ability": "Static",
+    "ability": "Static", 
     "item": "Light Ball",
     "nature": "Timid",
-    "evs": { "spa": 252, "spe": 252, "hp": 4 },
-    "ivs": { "hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31 }
+    "evs": { "spa": 252, "spe": 252, "hp": 4 }
   },
   "defender": {
     "species": "Charizard",
     "level": 50,
-    "ability": "Blaze",
-    "nature": "Modest",
-    "evs": { "hp": 252, "spa": 252, "spd": 4 }
+    "ability": "Blaze"
   },
   "move": {
-    "name": "Thunderbolt",
-    "isCrit": false
+    "name": "Thunderbolt"
   },
   "field": {
-    "gameType": "Singles",
-    "weather": "",
-    "terrain": ""
+    "gameType": "Singles"
   }
 }
+```
+
+**Output:**
+```
+**252 SpA Light Ball Pikachu Thunderbolt vs. 0 HP / 0 SpD Charizard: 198-234 (107 - 126.4%) -- guaranteed OHKO**
+
+Damage: 198-234
+KO Chance: guaranteed OHKO
 ```
 
 ## Deployment
