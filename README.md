@@ -2,6 +2,10 @@
 
 A server built using Model-Context Protocol (MCP) that provides AI agents a standardized interface for performing Pokémon damage calculations using the `@smogon/calc` package.
 
+<a href="https://glama.ai/mcp/servers/@jpbullalayao/pokemon-vgc-calc-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@jpbullalayao/pokemon-vgc-calc-mcp/badge" alt="Pokémon VGC Damage Calculator Server MCP server" />
+</a>
+
 ## Features
 
 - **MCP-compliant server** with TypeScript and the official MCP SDK
